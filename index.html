@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Paid To Try New Apps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #111111;
+            --surface-color: #1c1c1c;
+            --accent-green: #2ecc71;
+            --accent-green-dark: #27ae60;
+            --text-light: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: rgba(46, 204, 113, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif; background: var(--bg-dark); color: var(--text-light);
+            display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; position: relative;
+        }
+
+        .animated-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
+        .icon-shape { position: absolute; bottom: -150px; animation: floatUp 15s infinite linear; opacity: 0; will-change: transform, opacity; }
+        .icon-shape svg { width: 100%; height: 100%; opacity: 0.3; filter: drop-shadow(0 0 5px rgba(46, 204, 113, 0.5)); }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0; } 10%, 90% { opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        .view {
+            position: relative; z-index: 10; max-width: 500px; width: 90%; padding: 2.5rem;
+            background: rgba(28, 28, 28, 0.85); backdrop-filter: blur(12px); border-radius: 16px;
+            border: 1px solid var(--border-color); box-shadow: 0 10px 45px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            display: none;
+        }
+        .view.active {
+            display: block;
+            animation: popIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        
+        h1 { font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+        input[type="text"] {
+            width: 100%; background-color: var(--bg-dark); border: 2px solid var(--border-color);
+            border-radius: 10px; padding: 1.1rem; margin-bottom: 1.2rem; font-size: 1rem;
+            color: var(--text-light); text-align: center; transition: all 0.3s ease;
+        }
+        input[type="text"]::placeholder { color: var(--text-secondary); }
+        input[type="text"]:focus { outline: none; border-color: var(--accent-green); box-shadow: 0 0 15px rgba(46, 204, 113, 0.4); transform: scale(1.02); }
+        button {
+            width: 100%; background: var(--accent-green); color: var(--bg-dark); border: none;
+            border-radius: 10px; padding: 1.1rem; font-size: 1.2rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 1px;
+        }
+        button:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5); background: var(--accent-green-dark); }
+        button:disabled { background: #444; color: #888; cursor: not-allowed; box-shadow: none; }
+        .message { margin-top: 1rem; font-weight: 600; min-height: 22px; font-size: 0.9rem; }
+        .message.error { color: #e74c3c; } .message.success { color: var(--accent-green); }
+
+        #main-lander-view h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-green); }
+        #main-lander-view .subtitle { margin-bottom: 2.5rem; } /* More space for the button */
+
+        /* --- NEW: Button Animation --- */
+        #mainLanderButton {
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 0 35px rgba(46, 204, 113, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
+        }
+
+        #bridge-view h1 { font-size: 2.5rem; color: var(--text-light); }
+        #bridge-view h1 span { color: var(--accent-green); }
+
+        .how-it-works { margin-top: 2.5rem; text-align: left; border-top: 1px solid var(--border-color); padding-top: 2rem; }
+        .how-it-works h2 { text-align: center; margin-bottom: 1.5rem; font-size: 1.3rem; color: var(--text-light); }
+        .how-it-works ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        .how-it-works li { display: flex; align-items: center; font-size: 1rem; color: var(--text-secondary); }
+        .how-it-works li svg { width: 24px; height: 24px; min-width: 24px; margin-right: 1rem; color: var(--accent-green); }
+        .how-it-works li strong { color: var(--text-light); }
+    </style>
+</head>
+<body>
+
+    <div class="animated-background"></div>
+
+    <div id="main-lander-view" class="view active">
+        <header>
+            <h1>Get Paid To Try New Apps</h1>
+            <p class="subtitle">Complete offers on the next page for a chance to win real cash prizes!</p>
+        </header>
+        <button id="mainLanderButton" type="button">Start Earning</button>
+        
+        <section class="how-it-works">
+            <h2>How It Works</h2>
+            <ul>
+                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" /><path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" /></svg><span>Click the button to secure your spot.</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" /></svg><span><strong>Install apps</strong> & complete offers from our trusted partners.</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7.5a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" /><path fill-rule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v14.25c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 19.125V4.875ZM3 4.5a.375.375 0 0 0-.375.375v14.25c0 .207.168.375.375.375h17.25a.375.375 0 0 0 .375-.375V4.875a.375.375 0 0 0-.375-.375H3Z" clip-rule="evenodd" /></svg><span>Every completed offer is an entry into our <strong>cash prize draw!</strong></span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5a.75.75 0 0 1 .75.75V7.5h-1.5V2.25A.75.75 0 0 1 12 1.5ZM12 15.75a.75.75 0 0 1 .75.75v5.25h-1.5V16.5a.75.75 0 0 1 .75-.75ZM5.08 6.24a.75.75 0 0 1 .92-.5l3.5 2.02a.75.75 0 0 1-.5.92l-3.5-2.02a.75.75 0 0 1-.42-.42Zm12.92.5a.75.75 0 0 1-.5-.92l3.5-2.02a.75.75 0 0 1 .92.5l-3.5 2.02a.75.75 0 0 1-.42.42ZM6 18.92a.75.75 0 0 1 .5-.92l3.5-2.02a.75.75 0 1 1 .92.5l-3.5 2.02a.75.75 0 0 1-.92-.5ZM18.92 18a.75.75 0 0 1-.5.92l-3.5 2.02a.75.75 0 1 1-.92-.5l3.5-2.02a.75.75 0 0 1 .92.5Z" /><path fill-rule="evenodd" d="M12 5.25a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM9 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z" clip-rule="evenodd" /></svg><span><strong>Guaranteed Bonus:</strong> Everyone gets our "Digital Profits" Ebook.</span></li>
+            </ul>
+        </section>
+    </div>
+
+    <div id="bridge-view" class="view">
+        <header>
+            <h1><span>Last Step</span> To Get Paid</h1>
+            <p class="subtitle">Enter your Instagram username below. Winners are often announced on social media!</p>
+        </header>
+        <form id="bridgeForm">
+            <input type="text" id="instagram_username" placeholder="@your_instagram_username" required>
+            <button id="bridgeButton" type="submit">Proceed to Offers</button>
+        </form>
+        <p id="bridgeMessage" class="message"></p>
+    </div>
+    
+    <script>
+        // --- Get Elements for Both Views ---
+        const mainLanderView = document.getElementById('main-lander-view');
+        const bridgeView = document.getElementById('bridge-view');
+
+        // Elements for Main Lander (View 1)
+        const mainLanderButton = document.getElementById('mainLanderButton');
+
+        // Elements for Bridge Page (View 2)
+        const bridgeForm = document.getElementById('bridgeForm');
+        const instagramUsernameInput = document.getElementById('instagram_username');
+        const bridgeButton = document.getElementById('bridgeButton');
+        const bridgeMessage = document.getElementById('bridgeMessage');
+
+        // --- UPDATED Logic for Main Lander (View 1) ---
+        // This is now much simpler. It just listens for a click.
+        mainLanderButton.addEventListener('click', function() {
+            mainLanderButton.disabled = true;
+            mainLanderButton.textContent = 'Loading...';
+            
+            // --- The Transition Logic ---
+            // Hide View 1 and Show View 2
+            mainLanderView.classList.remove('active');
+            bridgeView.classList.add('active');
+        });
+
+        // --- Logic for Bridge Page (View 2) ---
+        bridgeForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = instagramUsernameInput.value.trim();
+
+            if (!username) {
+                bridgeMessage.className = 'message error';
+                bridgeMessage.textContent = 'Please enter your Instagram username.';
+                return;
+            }
+            
+            bridgeButton.disabled = true;
+            bridgeButton.textContent = 'Unlocking Offers...';
+            bridgeMessage.textContent = ''; 
+
+            try {
+                const response = await fetch('/.netlify/functions/submit-user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: username })
+                });
+                const data = await response.json();
+                if (response.ok && data.redirectUrl) {
+                    bridgeMessage.className = 'message success';
+                    bridgeMessage.textContent = 'Success! Redirecting you...';
+                    window.location.href = data.redirectUrl;
+                } else {
+                    throw new Error(data.message || 'Server error. Please try again.');
+                }
+            } catch (error) {
+                console.error('Submission Error:', error);
+                bridgeMessage.className = 'message error';
+                bridgeMessage.textContent = `Error: ${error.message}`;
+                bridgeButton.disabled = false;
+                bridgeButton.textContent = 'Proceed to Offers';
+            }
+        });
+
+        // --- Animated Background Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgContainer = document.querySelector('.animated-background');
+            const iconSvgs = [
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6h-1.5a.75.75 0 0 0 0 1.5h1.5v3.75a.75.75 0 0 0 1.5 0V12h1.5a.75.75 0 0 0 0-1.5h-1.5V6Z" clip-rule="evenodd" /></svg>`,
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 1 1 6 0h1.125a.75.75 0 0 0 0-1.5H9.375a1.5 1.5 0 1 0-3 0h-.375a.375.375 0 0 1-.375-.375V15Z" /><path d="M15 6.375V13.5h7.5V6.375a1.875 1.875 0 0 0-1.875-1.875h-5.625Zm7.5 9h-7.5v2.625c0 1.035.84 1.875 1.875 1.875h5.625a.375.375 0 0 0 .375-.375V15Z" /></svg>`
+            ];
+            const numIcons = 20;
+
+            for (let i = 0; i < numIcons; i++) {
+                const icon = document.createElement('div');
+                icon.classList.add('icon-shape');
+                icon.innerHTML = iconSvgs[Math.floor(Math.random() * iconSvgs.length)];
+                const size = Math.random() * 60 + 20;
+                icon.style.width = `${size}px`; icon.style.height = `${size}px`;
+                icon.style.left = `${Math.random() * 100}vw`;
+                icon.style.animationDelay = `${Math.random() * 15}s`;
+                icon.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                bgContainer.appendChild(icon);
+            }
+        });
+    </script>
+</body>
+</html>
